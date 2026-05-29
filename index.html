@@ -1506,20 +1506,33 @@ setInterval(updateCountdown, 1000);
 const audio = document.getElementById('bg-music');
 const playBtn = document.getElementById('play-btn');
 const waveBars = document.querySelectorAll('.wave-bar');
+
 let playing = false;
+
+/* AUTO PLAY AFTER FIRST USER INTERACTION */
+function startMusicAutomatically() {
+  audio.play().then(() => {
+    playing = true;
+    playBtn.textContent = '⏸';
+    waveBars.forEach(b => b.classList.remove('paused'));
+  }).catch(err => {
+    console.log("Autoplay blocked:", err);
+  });
+
+  document.removeEventListener('click', startMusicAutomatically);
+  document.removeEventListener('touchstart', startMusicAutomatically);
+}
+
+/* Start music on first tap/click */
+document.addEventListener('click', startMusicAutomatically);
+document.addEventListener('touchstart', startMusicAutomatically);
 
 function toggleMusic() {
   if (!playing) {
-    audio.play().then(() => {
-      playing = true;
-      playBtn.textContent = '⏸';
-      waveBars.forEach(b => b.classList.remove('paused'));
-    }).catch(() => {
-      // Audio file not found or blocked — still animate
-      playing = true;
-      playBtn.textContent = '⏸';
-      waveBars.forEach(b => b.classList.remove('paused'));
-    });
+    audio.play();
+    playing = true;
+    playBtn.textContent = '⏸';
+    waveBars.forEach(b => b.classList.remove('paused'));
   } else {
     audio.pause();
     playing = false;
@@ -1527,7 +1540,6 @@ function toggleMusic() {
     waveBars.forEach(b => b.classList.add('paused'));
   }
 }
-
 /* ═══════════════════════════════════════════════════════════════
    EASTER EGG — Click hero flower 5 times
 ═══════════════════════════════════════════════════════════════ */
