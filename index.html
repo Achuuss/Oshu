@@ -1243,7 +1243,7 @@ body.light-mode .nav-links a { color: var(--text-mid); }
 
 // CUSTOM MESSAGE HERE — Set Rose's next birthday date (YYYY, MM-1, DD)
 // Month is 0-indexed: Jan=0, Feb=1, Mar=2, ... Dec=11
-const birthdayDate = new Date(2025, 11, 25); // Example: Dec 25, 2025 — CHANGE THIS
+const birthdayDate = new Date(2026, 5, 11); // Example: Dec 25, 2025 — CHANGE THIS
 
 // CUSTOM MESSAGE HERE — Your personal love letter
 // Write as many lines as you want. Use \n for new paragraphs.
@@ -1490,7 +1490,7 @@ function updateCountdown() {
   const diff = target - now;
   if (diff <= 0) {
     document.querySelector('.countdown-glass').innerHTML =
-      `<div class="cd-expired">🎂 Happy Birthday, Rose! 🎂</div>`;
+      `<div class="cd-expired">💖 It's finally your day, my love 💖</div>`;
     return;
   }
   const days  = Math.floor(diff / 86400000);
