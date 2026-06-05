@@ -1598,7 +1598,7 @@ body.light-mode .nav-links a { color: var(--text-mid); }
 // CUSTOM MESSAGE HERE — Set Rose's birthday date (YYYY, month 0-indexed, DD)
 // Month is 0-indexed: Jan=0, Feb=1, Mar=2, Apr=3, May=4, Jun=5, ... Dec=11
 // Example below is June 11, 2026 — change to the real birthday
-const birthdayDate = new Date(2025, 5, 11);
+const birthdayDate = new Date(2020, 1, 0);
 
 // CUSTOM MESSAGE HERE — Your personal love letter (typed animation in the letter section)
 // Use \n for paragraph breaks
@@ -1831,11 +1831,8 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbo
 let surpriseTriggered = false;
 
 function updateCountdown() {
-  const now    = new Date();
-  let target   = new Date(birthdayDate);
-  if (target < now) target.setFullYear(now.getFullYear() + 1);
-
-  const diff = target - now;
+  const now = new Date();
+  const diff = birthdayDate - now;
 
   if (diff <= 0) {
     if (!surpriseTriggered) {
@@ -1849,6 +1846,7 @@ function updateCountdown() {
   const hours = Math.floor((diff % 86400000) / 3600000);
   const mins  = Math.floor((diff % 3600000) / 60000);
   const secs  = Math.floor((diff % 60000) / 1000);
+
   document.getElementById('cd-days').textContent  = String(days).padStart(2,'0');
   document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
   document.getElementById('cd-mins').textContent  = String(mins).padStart(2,'0');
